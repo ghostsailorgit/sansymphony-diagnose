@@ -1,0 +1,5 @@
+dist/
+*.log
+SsyDiagnose_*.html
+SsyDiagnose_*.json
+SsyDiagnose_*.csv

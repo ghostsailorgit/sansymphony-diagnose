@@ -1,0 +1,615 @@
+﻿{
+    "Time":  "27.11.2026 02:07",
+    "Server":  "SDS-A",
+    "Group":  "DEMO-GROUP",
+    "Seconds":  60,
+    "ToolVersion":  "1.0.0 (Demo)",
+    "Checks":  [
+                   {
+                       "Status":  "Kritisch",
+                       "Rank":  3,
+                       "Category":  "Pools \u0026 Disks",
+                       "Check":  "S.M.A.R.T.",
+                       "Object":  "Disk 7 on SDS-B",
+                       "Result":  "SMART: PredictFailure",
+                       "Recommendation":  "Disk vorsorglich ersetzen",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Betrieb",
+                       "Check":  "Alarmierung (E-Mail/Syslog)",
+                       "Object":  "DEMO-GROUP",
+                       "Result":  "Weder E-Mail- noch Syslog-Benachrichtigung eingerichtet",
+                       "Recommendation":  "SMTP oder Syslog einrichten, damit Ausfälle und Warnungen jemand erfährt",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Betrieb",
+                       "Check":  "Konfigurationssicherung",
+                       "Object":  "SDS-A",
+                       "Result":  "Letzte Sicherung: BACKUP_SDS-A.zip vor 38 Tag(en)",
+                       "Recommendation":  "Konfiguration nach jeder Änderung und regelmäßig sichern",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Host-Pfade",
+                       "Check":  "Aktive Pfade je vDisk",
+                       "Object":  "esx02.demo.local / VD-SQL01",
+                       "Result":  "2 von 4 Pfaden aktiv; ohne Verbindung: SDS-B-FE1 on SDS-B, SDS-B-FE2 on SDS-B",
+                       "Recommendation":  "Fehlende iSCSI-Sessions herstellen (Netz, Subnetze, VMkernel-Ports/Initiator-IPs, Discovery, Rescan)",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Host-Pfade",
+                       "Check":  "Initiator-IPs des Hosts",
+                       "Object":  "esx02.demo.local",
+                       "Result":  "Alle Sessions kommen von einer einzigen IP (10.20.1.12)",
+                       "Recommendation":  "Zweiten iSCSI-Netzwerkport (z. B. VMkernel) im zweiten Netz anlegen",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Leistung",
+                       "Check":  "Antwortzeit für Hosts",
+                       "Object":  "SDS-A",
+                       "Result":  "14.8 ms bei 412 IOPS / 51.5 MB/s",
+                       "Recommendation":  "Wahrscheinliche Ursache: Spiegelziel SDS-B braucht 9.6 ms pro Spiegel-Schreibvorgang",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Leistung",
+                       "Check":  "Spiegel-Schreiblatenz",
+                       "Object":  "SDS-B",
+                       "Result":  "9.6 ms bei 288 Spiegel-IOPS (jeder Host-Schreibvorgang wartet darauf)",
+                       "Recommendation":  "Cache (99 % Treffer) und Pool (1.2 ms) auf SDS-B sind unauffällig - die Zeit geht auf der Spiegelstrecke verloren",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Lizenz \u0026 Software",
+                       "Check":  "Lizenzablauf",
+                       "Object":  "DEMO-GROUP",
+                       "Result":  "Nächster Ablauf: in 21 Tagen",
+                       "Recommendation":  "Lizenz rechtzeitig verlängern - abgelaufene Lizenz stoppt Server",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Monitore \u0026 Alarme",
+                       "Check":  "Alarme letzte 24 h",
+                       "Object":  "DEMO-GROUP",
+                       "Result":  "12 Fehler, 31 Warnungen",
+                       "Recommendation":  "Häufigste Fehler prüfen (Details)",
+                       "Details":  "7× The I/O latency of Virtual Disk VD-SQL# from DEMO-GROUP is \u003e= #ms\r\n3× Connection to server {#} has been lost.\r\n2× Mirror path to SDS-B is down"
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Monitore \u0026 Alarme",
+                       "Check":  "I/O latency",
+                       "Object":  "I/O latency of Virtual Disk VD-SQL01",
+                       "Result":  "The I/O latency is \u003e= 120ms",
+                       "Recommendation":  "Siehe DataCore-Konsole, Bereich Monitore",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Netzwerk",
+                       "Check":  "Energiesparen der Karte",
+                       "Object":  "FE1 (SDS-A-FE1, 10.20.1.11/24)",
+                       "Result":  "Windows darf die Karte zum Energiesparen abschalten",
+                       "Recommendation":  "In den Karteneigenschaften die Energiesparoption deaktivieren",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Netzwerk",
+                       "Check":  "Getrennte Subnetze je Pfad",
+                       "Object":  "SDS-A",
+                       "Result":  "Mehrere Karten liegen im selben IP-Netz: MR1 10.30.0.0/16 \u003c-\u003e MR2 10.30.0.0/16",
+                       "Recommendation":  "Jedem Pfad ein eigenes Subnetz geben (z. B. /24 je Netz) - auf allen Servern UND auf den Hosts",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Netzwerk",
+                       "Check":  "Netzwerkkarten-Typ",
+                       "Object":  "MR1 (SDS-A-MR1, 10.30.1.11/16)",
+                       "Result":  "Emulierte/ältere NIC: Intel(R) 82574L Gigabit Network Connection",
+                       "Recommendation":  "Im Hypervisor auf VMXNET3 (paravirtualisiert) umstellen",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Pools \u0026 Disks",
+                       "Check":  "Freie Kapazität",
+                       "Object":  "Pool1 on SDS-A",
+                       "Result":  "14 % frei (2.1 TB von 15.0 TB)",
+                       "Recommendation":  "Kapazitätserweiterung planen",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Replikation \u0026 Schutz",
+                       "Check":  "Replikationsrückstand",
+                       "Object":  "VD-FILE01",
+                       "Result":  "Zeitversatz 42.5 min",
+                       "Recommendation":  "Bandbreite zur DR-Seite und Puffer prüfen - bei Ausfall gingen diese Daten verloren",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Server \u0026 Cache",
+                       "Check":  "Freier Arbeitsspeicher",
+                       "Object":  "SDS-B",
+                       "Result":  "1.4 GB von 64 GB frei (2.2 %)",
+                       "Recommendation":  "RAM erweitern oder Speicherverbraucher begrenzen",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Spiegelstrecke",
+                       "Check":  "Fehlschlagende Anmeldeversuche",
+                       "Object":  "10.20.1.12 -\u003e 10.20.2.11 (FE2)",
+                       "Result":  "Initiator 10.20.1.12 versucht sich anzumelden, liegt aber nicht im Subnetz der Zielkarte",
+                       "Recommendation":  "Auf der Initiator-Seite einen Netzwerkport im passenden Subnetz verwenden (z. B. ESXi: VMkernel-Port mit /24 im Zielnetz)",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Spiegelstrecke",
+                       "Check":  "Pfadtrennung Spiegel-Sessions",
+                       "Object":  "SDS-A",
+                       "Result":  "Alle ausgehenden Spiegel-Sessions (10.30.1.12, 10.30.2.12) nutzen dieselbe Quell-IP 10.30.1.11 - die zweite Spiegelkarte sendet nicht",
+                       "Recommendation":  "Spiegelnetze in getrennte Subnetze legen, damit jeder Spiegelpfad seine eigene Karte nutzt",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "vDisks \u0026 Spiegel",
+                       "Check":  "Spiegel-Resynchronisation",
+                       "Object":  "VD-FILE01 on SDS-B",
+                       "Result":  "Resync läuft: 312.4 GB offen (63 %)",
+                       "Recommendation":  "Während des Resync ist die Redundanz eingeschränkt",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Verfügbarkeit",
+                       "Check":  "Host erreicht beide Spiegelseiten",
+                       "Object":  "esx02.demo.local / VD-SQL01",
+                       "Result":  "Aktive Pfade nur zu: SDS-A",
+                       "Recommendation":  "Fällt dieser Server aus, verliert der Host die vDisk - Pfade zum zweiten Server herstellen",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Warnung",
+                       "Rank":  2,
+                       "Category":  "Windows",
+                       "Check":  "Virenschutz-Ausnahmen",
+                       "Object":  "SDS-A",
+                       "Result":  "Defender-Echtzeitschutz aktiv, keine Ausnahme für DataCore-Ordner",
+                       "Recommendation":  "Ausnahmen gemäß DataCore-Empfehlung setzen",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "Info",
+                       "Rank":  1,
+                       "Category":  "Verfügbarkeit",
+                       "Check":  "Witness (Split-Brain-Schutz)",
+                       "Object":  "DEMO-GROUP",
+                       "Result":  "Kein Witness konfiguriert",
+                       "Recommendation":  "Bei zwei Servern einen Witness einrichten, damit bei Verbindungsverlust automatisch die richtige Seite aktiv bleibt",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Betrieb",
+                       "Check":  "Uhrzeit synchron",
+                       "Object":  "SDS-B",
+                       "Result":  "Abweichung zu diesem Server: 0.4 s",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Host-Pfade",
+                       "Check":  "Aktive Pfade je vDisk",
+                       "Object":  "esx01.demo.local / VD-SQL01",
+                       "Result":  "4 von 4 Pfaden aktiv",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Leistung",
+                       "Check":  "Pool-Backend-Latenz",
+                       "Object":  "SDS-A",
+                       "Result":  "1.1 ms",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Lizenz \u0026 Software",
+                       "Check":  "Gleicher Versionsstand",
+                       "Object":  "DEMO-GROUP",
+                       "Result":  "Alle Server auf 10.0 PSP 22 (Build 15.0.2200.53414)",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Lizenz \u0026 Software",
+                       "Check":  "Lizenz-Compliance",
+                       "Object":  "DEMO-GROUP",
+                       "Result":  "Lizenztyp: Standard",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Netzwerk",
+                       "Check":  "DataCore-Verwaltungsport 3793",
+                       "Object":  "SDS-B",
+                       "Result":  "sds-b.demo.local (10.10.0.12) erreichbar",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Pools \u0026 Disks",
+                       "Check":  "Freie Kapazität",
+                       "Object":  "Pool1 on SDS-B",
+                       "Result":  "41 % frei (6.2 TB von 15.0 TB)",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Replikation \u0026 Schutz",
+                       "Check":  "Replikationsstatus",
+                       "Object":  "VD-SQL01",
+                       "Result":  "Status: Replicating; Übertragung: Enabled; Fehler: keine",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Replikation \u0026 Schutz",
+                       "Check":  "Snapshots/CDP/Rollbacks",
+                       "Object":  "DEMO-GROUP",
+                       "Result":  "6 Snapshot(s), 2 vDisk-Seite(n) mit CDP, 0 Rollback(s)",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Server \u0026 Cache",
+                       "Check":  "Cache-Größe",
+                       "Object":  "SDS-A",
+                       "Result":  "38.4 GB Cache (60 % des RAM)",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Server \u0026 Cache",
+                       "Check":  "Schreib-Cache-Modus",
+                       "Object":  "SDS-A",
+                       "Result":  "WritebackGlobal",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Server \u0026 Cache",
+                       "Check":  "Schreib-Cache-Modus",
+                       "Object":  "SDS-B",
+                       "Result":  "WritebackGlobal",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Spiegelstrecke",
+                       "Check":  "MTU Ende-zu-Ende",
+                       "Object":  "10.30.1.11 -\u003e 10.30.1.12",
+                       "Result":  "MTU 9000 durchgängig",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Spiegelstrecke",
+                       "Check":  "Netzlaufzeit",
+                       "Object":  "10.30.1.11 -\u003e 10.30.1.12",
+                       "Result":  "Ø 0 ms, max 1 ms, kein Verlust",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "vDisks \u0026 Spiegel",
+                       "Check":  "vDisk-Status",
+                       "Object":  "VD-SQL01",
+                       "Result":  "Online, MultiPathMirrored, 2048.0 GB",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Verfügbarkeit",
+                       "Check":  "Serverstatus",
+                       "Object":  "SDS-A",
+                       "Result":  "Online",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Verfügbarkeit",
+                       "Check":  "Serverstatus",
+                       "Object":  "SDS-B",
+                       "Result":  "Online",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Windows",
+                       "Check":  "CPU-Auslastung",
+                       "Object":  "SDS-A",
+                       "Result":  "16 logische CPUs, Auslastung 38 %; 2 für DataCore-Poller reserviert",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   },
+                   {
+                       "Status":  "OK",
+                       "Rank":  0,
+                       "Category":  "Windows",
+                       "Check":  "Energiesparplan",
+                       "Object":  "SDS-A",
+                       "Result":  "Höchstleistung",
+                       "Recommendation":  "",
+                       "Details":  ""
+                   }
+               ],
+    "Measurements":  [
+                         {
+                             "Kind":  "Server",
+                             "Name":  "SDS-A",
+                             "IntervalSec":  60,
+                             "FeIOPS":  412,
+                             "FeLatMs":  14.8,
+                             "MirrorIOPS":  3.1,
+                             "MirrorLatMs":  1.2,
+                             "PoolIOPS":  96,
+                             "PoolLatMs":  1.1,
+                             "MBps":  51.5,
+                             "CacheWriteHitPct":  99.2,
+                             "CacheReadHitPct":  71.4,
+                             "PollerLoad":  22,
+                             "ReplMBToSend":  9830
+                         },
+                         {
+                             "Kind":  "Server",
+                             "Name":  "SDS-B",
+                             "IntervalSec":  60,
+                             "FeIOPS":  0,
+                             "FeLatMs":  null,
+                             "MirrorIOPS":  288,
+                             "MirrorLatMs":  9.6,
+                             "PoolIOPS":  81,
+                             "PoolLatMs":  1.2,
+                             "MBps":  36,
+                             "CacheWriteHitPct":  99,
+                             "CacheReadHitPct":  null,
+                             "PollerLoad":  18,
+                             "ReplMBToSend":  0
+                         },
+                         {
+                             "Kind":  "Pool",
+                             "Name":  "Pool1 on SDS-A",
+                             "IntervalSec":  60,
+                             "IOPS":  96,
+                             "ReadIOPS":  41,
+                             "WriteIOPS":  55,
+                             "MBps":  38.2,
+                             "LatMs":  1.1,
+                             "ReadLatMs":  0.9,
+                             "WriteLatMs":  1.3
+                         },
+                         {
+                             "Kind":  "Port",
+                             "Name":  "SDS-A-FE1 on SDS-A",
+                             "IntervalSec":  60,
+                             "Role":  "Frontend",
+                             "IOPS":  208,
+                             "MBps":  26,
+                             "LatMs":  14.5,
+                             "ErrorsDelta":  0,
+                             "BusyDelta":  0
+                         },
+                         {
+                             "Kind":  "Port",
+                             "Name":  "SDS-B-MR1 on SDS-B",
+                             "IntervalSec":  60,
+                             "Role":  "Mirror",
+                             "IOPS":  288,
+                             "MBps":  36,
+                             "LatMs":  9.4,
+                             "ErrorsDelta":  0,
+                             "BusyDelta":  0
+                         },
+                         {
+                             "Kind":  "Replication",
+                             "Name":  "VD-FILE01 from DEMO-GROUP",
+                             "IntervalSec":  60,
+                             "MBps":  18.2,
+                             "MBToSend":  9830,
+                             "TimeLagSec":  2550,
+                             "InitPct":  null,
+                             "BufferFreePct":  64
+                         }
+                     ],
+    "Assessment":  {
+                       "Grade":  "Rot",
+                       "Score":  34,
+                       "Critical":  1,
+                       "Warnings":  20,
+                       "Infos":  1,
+                       "Ok":  19,
+                       "Categories":  [
+                                          {
+                                              "Category":  "Verfügbarkeit",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  1,
+                                              "Infos":  1,
+                                              "Ok":  2
+                                          },
+                                          {
+                                              "Category":  "Lizenz \u0026 Software",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  1,
+                                              "Infos":  0,
+                                              "Ok":  2
+                                          },
+                                          {
+                                              "Category":  "Server \u0026 Cache",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  1,
+                                              "Infos":  0,
+                                              "Ok":  3
+                                          },
+                                          {
+                                              "Category":  "Pools \u0026 Disks",
+                                              "Worst":  "Kritisch",
+                                              "Critical":  1,
+                                              "Warnings":  1,
+                                              "Infos":  0,
+                                              "Ok":  1
+                                          },
+                                          {
+                                              "Category":  "vDisks \u0026 Spiegel",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  1,
+                                              "Infos":  0,
+                                              "Ok":  1
+                                          },
+                                          {
+                                              "Category":  "Host-Pfade",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  2,
+                                              "Infos":  0,
+                                              "Ok":  1
+                                          },
+                                          {
+                                              "Category":  "Replikation \u0026 Schutz",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  1,
+                                              "Infos":  0,
+                                              "Ok":  2
+                                          },
+                                          {
+                                              "Category":  "Monitore \u0026 Alarme",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  2,
+                                              "Infos":  0,
+                                              "Ok":  0
+                                          },
+                                          {
+                                              "Category":  "Betrieb",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  2,
+                                              "Infos":  0,
+                                              "Ok":  1
+                                          },
+                                          {
+                                              "Category":  "Windows",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  1,
+                                              "Infos":  0,
+                                              "Ok":  2
+                                          },
+                                          {
+                                              "Category":  "Netzwerk",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  3,
+                                              "Infos":  0,
+                                              "Ok":  1
+                                          },
+                                          {
+                                              "Category":  "Spiegelstrecke",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  2,
+                                              "Infos":  0,
+                                              "Ok":  2
+                                          },
+                                          {
+                                              "Category":  "Leistung",
+                                              "Worst":  "Warnung",
+                                              "Critical":  0,
+                                              "Warnings":  2,
+                                              "Infos":  0,
+                                              "Ok":  1
+                                          }
+                                      ],
+                       "Summary":  "Gesamtbewertung: Rot (34 von 100 Punkten)\r\nKritisch: 1   Warnungen: 20   Hinweise: 1   OK: 19\r\nEs gibt kritische Befunde, die Verfügbarkeit oder Leistung unmittelbar gefährden. Diese zuerst beheben.\r\n\r\nVerfügbarkeit: 4 Warnung(en)  |  Leistung: 5 Warnung(en)  |  Schutz/DR: 1 Warnung(en)  |  Betrieb: kritisch\r\n\r\nLeistung:\r\nSDS-A: 412 IOPS von Hosts, mittlere Antwortzeit 14.8 ms - zu hoch. Wahrscheinliche Ursache: Spiegelziel SDS-B braucht 9.6 ms pro Spiegel-Schreibvorgang.\r\nReplikation VD-FILE01: 18.2 MB/s übertragen, 9 830 MB ausstehend.\r\n\r\nWichtigste Maßnahmen:\r\n1. [Kritisch] S.M.A.R.T. - Disk 7 on SDS-B: Disk vorsorglich ersetzen\r\n2. [Warnung] Getrennte Subnetze je Pfad - SDS-A: Jedem Pfad ein eigenes Subnetz geben (z. B. /24 je Netz) - auf allen Servern UND auf den Hosts\r\n3. [Warnung] Netzwerkkarten-Typ - MR1 (SDS-A-MR1, 10.30.1.11/16): Im Hypervisor auf VMXNET3 (paravirtualisiert) umstellen\r\n4. [Warnung] Alarmierung (E-Mail/Syslog) - DEMO-GROUP: SMTP oder Syslog einrichten, damit Ausfälle und Warnungen jemand erfährt\r\n5. [Warnung] Konfigurationssicherung - SDS-A: Konfiguration nach jeder Änderung und regelmäßig sichern\r\n6. [Warnung] Virenschutz-Ausnahmen - SDS-A: Ausnahmen gemäß DataCore-Empfehlung setzen"
+                   },
+    "MeasurementText":  "=== Server (Fe = Host-Zugriffe, Mirror = eingehende Spiegel-Schreibvorgänge) - Intervall 60 s ===\r\nName  FeIOPS FeLatMs MirrorIOPS MirrorLatMs PoolIOPS PoolLatMs MBps CacheWriteHitPct CacheReadHitPct\r\n----  ------ ------- ---------- ----------- -------- --------- ---- ---------------- ---------------\r\nSDS-A    412    14.8        3.1         1.2       96       1.1 51.5             99.2            71.4\r\nSDS-B      0                288         9.6       81       1.2   36               99\r\n\r\n=== Disk-Pools - Intervall 60 s ===\r\nName           IOPS ReadIOPS WriteIOPS MBps LatMs ReadLatMs WriteLatMs\r\n----           ---- -------- --------- ---- ----- --------- ----------\r\nPool1 on SDS-A   96       41        55 38.2   1.1       0.9        1.3\r\n\r\n=== Frontend- und Spiegel-Ports - Intervall 60 s ===\r\nName               Role     IOPS MBps LatMs ErrorsDelta BusyDelta\r\n----               ----     ---- ---- ----- ----------- ---------\r\nSDS-A-FE1 on SDS-A Frontend  208   26  14.5           0         0\r\nSDS-B-MR1 on SDS-B Mirror    288   36   9.4           0         0\r\n\r\n=== Replikationen - Intervall 60 s ===\r\nName                      MBps MBToSend TimeLagSec InitPct BufferFreePct\r\n----                      ---- -------- ---------- ------- -------------\r\nVD-FILE01 from DEMO-GROUP 18.2     9830       2550                    64\r\n\r\nEinheiten: IOPS = Operationen/s, MBps = MB/s, *LatMs = mittlere Antwortzeit in ms, *Pct = Prozent.\r\n",
+    "InventoryText":  "=== Servergruppe DEMO-GROUP - Server ===\r\nServer Status Version     Cache           RAM   Frei   CacheGröße CPU     \r\n------ ------ -------     -----           ---   ----   ---------- ---     \r\nSDS-A  Online 10.0 PSP 22 WritebackGlobal 64 GB 9.8 GB 38.4 GB    16 Kerne\r\nSDS-B  Online 10.0 PSP 22 WritebackGlobal 64 GB 1.4 GB 38.4 GB    16 Kerne\r\n\r\n=== Disk-Pools ===\r\nPool           Status  Tiering Tiers Disks Frei Gesamt   \r\n----           ------  ------- ----- ----- ---- ------   \r\nPool1 on SDS-A Running    True 1,2,3    12 14 % 15 360 GB\r\nPool1 on SDS-B Running    True 1,2,3    12 41 % 15 360 GB\r\n\r\n=== Virtuelle Disks ===\r\nvDisk     Typ               Größe   Status Ausgeliefert Seiten                          \r\n-----     ---               -----   ------ ------------ ------                          \r\nVD-SQL01  MultiPathMirrored 2048 GB Online         True SDS-A:UpToDate, SDS-B:UpToDate  \r\nVD-FILE01 MultiPathMirrored 4096 GB Online         True SDS-A:UpToDate, SDS-B:Recovering\r\n\r\n=== Host-Pfade: esx02.demo.local ===\r\nvDisk    Ziel               Aktiv Verbindung            \r\n-----    ----               ----- ----------            \r\nVD-SQL01 SDS-A-FE1 on SDS-A  True 10.20.1.12-\u003e10.20.1.11\r\nVD-SQL01 SDS-A-FE2 on SDS-A  True 10.20.2.12-\u003e10.20.2.11\r\nVD-SQL01 SDS-B-FE1 on SDS-B False                       \r\nVD-SQL01 SDS-B-FE2 on SDS-B False\r\n\r\n",
+    "Comparison":  null
+}

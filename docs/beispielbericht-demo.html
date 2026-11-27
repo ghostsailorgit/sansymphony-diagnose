@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SANsymphony Diagnose SDS-A</title><style>body{font-family:Segoe UI,Arial,sans-serif;margin:24px;color:#222;background:#fff}h1{margin:0 0 4px}small{color:#666}.grade{display:inline-block;padding:14px 22px;border-radius:8px;color:#fff;font-size:22px;font-weight:600;margin:14px 0}.tiles{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 16px}.tile{border-left:6px solid #999;background:#f6f6f6;padding:6px 10px;border-radius:4px;font-size:13px;min-width:150px}pre{background:#f6f6f6;padding:12px;border-radius:6px;white-space:pre-wrap;font-family:Consolas,monospace;font-size:12px;overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px}th,td{border:1px solid #ddd;padding:5px 7px;text-align:left;vertical-align:top}th{background:#f0f0f0;position:sticky;top:0}tr.Kritisch{background:#f8d7da}tr.Warnung{background:#fff3cd}tr.Info{background:#e7f1ff}tr.OK{background:#eef8f0}details{margin:6px 0}@media (prefers-color-scheme:dark){body{background:#1e1e1e;color:#ddd}pre,.tile{background:#2a2a2a}th{background:#333}th,td{border-color:#444}tr.Kritisch{background:#5a2328}tr.Warnung{background:#5a4a1a}tr.Info{background:#1f3550}tr.OK{background:#1f3a28}}</style></head><body>
+<h1>SANsymphony Diagnose</h1><small>Server SDS-A · Gruppe DEMO-GROUP · 27.11.2026 02:07 · Messdauer 60 s · Tool 1.0.0 (Demo)</small><br>
+<div class="grade" style="background:#c0392b">Rot - 34/100</div>
+<div class="tiles"><div class='tile' style='border-left-color:#d4a017'><b>Verf&#252;gbarkeit</b><br>0 K · 1 W · 1 I · 2 OK</div><div class='tile' style='border-left-color:#d4a017'><b>Lizenz &amp; Software</b><br>0 K · 1 W · 0 I · 2 OK</div><div class='tile' style='border-left-color:#d4a017'><b>Server &amp; Cache</b><br>0 K · 1 W · 0 I · 3 OK</div><div class='tile' style='border-left-color:#c0392b'><b>Pools &amp; Disks</b><br>1 K · 1 W · 0 I · 1 OK</div><div class='tile' style='border-left-color:#d4a017'><b>vDisks &amp; Spiegel</b><br>0 K · 1 W · 0 I · 1 OK</div><div class='tile' style='border-left-color:#d4a017'><b>Host-Pfade</b><br>0 K · 2 W · 0 I · 1 OK</div><div class='tile' style='border-left-color:#d4a017'><b>Replikation &amp; Schutz</b><br>0 K · 1 W · 0 I · 2 OK</div><div class='tile' style='border-left-color:#d4a017'><b>Monitore &amp; Alarme</b><br>0 K · 2 W · 0 I · 0 OK</div><div class='tile' style='border-left-color:#d4a017'><b>Betrieb</b><br>0 K · 2 W · 0 I · 1 OK</div><div class='tile' style='border-left-color:#d4a017'><b>Windows</b><br>0 K · 1 W · 0 I · 2 OK</div><div class='tile' style='border-left-color:#d4a017'><b>Netzwerk</b><br>0 K · 3 W · 0 I · 1 OK</div><div class='tile' style='border-left-color:#d4a017'><b>Spiegelstrecke</b><br>0 K · 2 W · 0 I · 2 OK</div><div class='tile' style='border-left-color:#d4a017'><b>Leistung</b><br>0 K · 2 W · 0 I · 1 OK</div></div>
+<pre>Gesamtbewertung: Rot (34 von 100 Punkten)
+Kritisch: 1   Warnungen: 20   Hinweise: 1   OK: 19
+Es gibt kritische Befunde, die Verf&#252;gbarkeit oder Leistung unmittelbar gef&#228;hrden. Diese zuerst beheben.
+
+Verf&#252;gbarkeit: 4 Warnung(en)  |  Leistung: 5 Warnung(en)  |  Schutz/DR: 1 Warnung(en)  |  Betrieb: kritisch
+
+Leistung:
+SDS-A: 412 IOPS von Hosts, mittlere Antwortzeit 14.8 ms - zu hoch. Wahrscheinliche Ursache: Spiegelziel SDS-B braucht 9.6 ms pro Spiegel-Schreibvorgang.
+Replikation VD-FILE01: 18.2 MB/s &#252;bertragen, 9 830 MB ausstehend.
+
+Wichtigste Ma&#223;nahmen:
+1. [Kritisch] S.M.A.R.T. - Disk 7 on SDS-B: Disk vorsorglich ersetzen
+2. [Warnung] Getrennte Subnetze je Pfad - SDS-A: Jedem Pfad ein eigenes Subnetz geben (z. B. /24 je Netz) - auf allen Servern UND auf den Hosts
+3. [Warnung] Netzwerkkarten-Typ - MR1 (SDS-A-MR1, 10.30.1.11/16): Im Hypervisor auf VMXNET3 (paravirtualisiert) umstellen
+4. [Warnung] Alarmierung (E-Mail/Syslog) - DEMO-GROUP: SMTP oder Syslog einrichten, damit Ausf&#228;lle und Warnungen jemand erf&#228;hrt
+5. [Warnung] Konfigurationssicherung - SDS-A: Konfiguration nach jeder &#196;nderung und regelm&#228;&#223;ig sichern
+6. [Warnung] Virenschutz-Ausnahmen - SDS-A: Ausnahmen gem&#228;&#223; DataCore-Empfehlung setzen</pre>
+
+<h2>Befunde</h2><table><tr><th>Status</th><th>Bereich</th><th>Prüfung</th><th>Objekt</th><th>Ergebnis</th><th>Empfehlung</th></tr>
+<tr class='Kritisch'><td>Kritisch</td><td>Pools &amp; Disks</td><td>S.M.A.R.T.</td><td>Disk 7 on SDS-B</td><td>SMART: PredictFailure</td><td>Disk vorsorglich ersetzen</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Betrieb</td><td>Alarmierung (E-Mail/Syslog)</td><td>DEMO-GROUP</td><td>Weder E-Mail- noch Syslog-Benachrichtigung eingerichtet</td><td>SMTP oder Syslog einrichten, damit Ausf&#228;lle und Warnungen jemand erf&#228;hrt</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Betrieb</td><td>Konfigurationssicherung</td><td>SDS-A</td><td>Letzte Sicherung: BACKUP_SDS-A.zip vor 38 Tag(en)</td><td>Konfiguration nach jeder &#196;nderung und regelm&#228;&#223;ig sichern</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Host-Pfade</td><td>Aktive Pfade je vDisk</td><td>esx02.demo.local / VD-SQL01</td><td>2 von 4 Pfaden aktiv; ohne Verbindung: SDS-B-FE1 on SDS-B, SDS-B-FE2 on SDS-B</td><td>Fehlende iSCSI-Sessions herstellen (Netz, Subnetze, VMkernel-Ports/Initiator-IPs, Discovery, Rescan)</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Host-Pfade</td><td>Initiator-IPs des Hosts</td><td>esx02.demo.local</td><td>Alle Sessions kommen von einer einzigen IP (10.20.1.12)</td><td>Zweiten iSCSI-Netzwerkport (z. B. VMkernel) im zweiten Netz anlegen</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Leistung</td><td>Antwortzeit f&#252;r Hosts</td><td>SDS-A</td><td>14.8 ms bei 412 IOPS / 51.5 MB/s</td><td>Wahrscheinliche Ursache: Spiegelziel SDS-B braucht 9.6 ms pro Spiegel-Schreibvorgang</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Leistung</td><td>Spiegel-Schreiblatenz</td><td>SDS-B</td><td>9.6 ms bei 288 Spiegel-IOPS (jeder Host-Schreibvorgang wartet darauf)</td><td>Cache (99 % Treffer) und Pool (1.2 ms) auf SDS-B sind unauff&#228;llig - die Zeit geht auf der Spiegelstrecke verloren</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Lizenz &amp; Software</td><td>Lizenzablauf</td><td>DEMO-GROUP</td><td>N&#228;chster Ablauf: in 21 Tagen</td><td>Lizenz rechtzeitig verl&#228;ngern - abgelaufene Lizenz stoppt Server</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Monitore &amp; Alarme</td><td>Alarme letzte 24 h</td><td>DEMO-GROUP</td><td>12 Fehler, 31 Warnungen<details><summary>Details</summary><pre>7&#215; The I/O latency of Virtual Disk VD-SQL# from DEMO-GROUP is &gt;= #ms
+3&#215; Connection to server {#} has been lost.
+2&#215; Mirror path to SDS-B is down</pre></details></td><td>H&#228;ufigste Fehler pr&#252;fen (Details)</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Monitore &amp; Alarme</td><td>I/O latency</td><td>I/O latency of Virtual Disk VD-SQL01</td><td>The I/O latency is &gt;= 120ms</td><td>Siehe DataCore-Konsole, Bereich Monitore</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Netzwerk</td><td>Energiesparen der Karte</td><td>FE1 (SDS-A-FE1, 10.20.1.11/24)</td><td>Windows darf die Karte zum Energiesparen abschalten</td><td>In den Karteneigenschaften die Energiesparoption deaktivieren</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Netzwerk</td><td>Getrennte Subnetze je Pfad</td><td>SDS-A</td><td>Mehrere Karten liegen im selben IP-Netz: MR1 10.30.0.0/16 &lt;-&gt; MR2 10.30.0.0/16</td><td>Jedem Pfad ein eigenes Subnetz geben (z. B. /24 je Netz) - auf allen Servern UND auf den Hosts</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Netzwerk</td><td>Netzwerkkarten-Typ</td><td>MR1 (SDS-A-MR1, 10.30.1.11/16)</td><td>Emulierte/&#228;ltere NIC: Intel(R) 82574L Gigabit Network Connection</td><td>Im Hypervisor auf VMXNET3 (paravirtualisiert) umstellen</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Pools &amp; Disks</td><td>Freie Kapazit&#228;t</td><td>Pool1 on SDS-A</td><td>14 % frei (2.1 TB von 15.0 TB)</td><td>Kapazit&#228;tserweiterung planen</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Replikation &amp; Schutz</td><td>Replikationsr&#252;ckstand</td><td>VD-FILE01</td><td>Zeitversatz 42.5 min</td><td>Bandbreite zur DR-Seite und Puffer pr&#252;fen - bei Ausfall gingen diese Daten verloren</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Server &amp; Cache</td><td>Freier Arbeitsspeicher</td><td>SDS-B</td><td>1.4 GB von 64 GB frei (2.2 %)</td><td>RAM erweitern oder Speicherverbraucher begrenzen</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Spiegelstrecke</td><td>Fehlschlagende Anmeldeversuche</td><td>10.20.1.12 -&gt; 10.20.2.11 (FE2)</td><td>Initiator 10.20.1.12 versucht sich anzumelden, liegt aber nicht im Subnetz der Zielkarte</td><td>Auf der Initiator-Seite einen Netzwerkport im passenden Subnetz verwenden (z. B. ESXi: VMkernel-Port mit /24 im Zielnetz)</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Spiegelstrecke</td><td>Pfadtrennung Spiegel-Sessions</td><td>SDS-A</td><td>Alle ausgehenden Spiegel-Sessions (10.30.1.12, 10.30.2.12) nutzen dieselbe Quell-IP 10.30.1.11 - die zweite Spiegelkarte sendet nicht</td><td>Spiegelnetze in getrennte Subnetze legen, damit jeder Spiegelpfad seine eigene Karte nutzt</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>vDisks &amp; Spiegel</td><td>Spiegel-Resynchronisation</td><td>VD-FILE01 on SDS-B</td><td>Resync l&#228;uft: 312.4 GB offen (63 %)</td><td>W&#228;hrend des Resync ist die Redundanz eingeschr&#228;nkt</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Verf&#252;gbarkeit</td><td>Host erreicht beide Spiegelseiten</td><td>esx02.demo.local / VD-SQL01</td><td>Aktive Pfade nur zu: SDS-A</td><td>F&#228;llt dieser Server aus, verliert der Host die vDisk - Pfade zum zweiten Server herstellen</td></tr>
+<tr class='Warnung'><td>Warnung</td><td>Windows</td><td>Virenschutz-Ausnahmen</td><td>SDS-A</td><td>Defender-Echtzeitschutz aktiv, keine Ausnahme f&#252;r DataCore-Ordner</td><td>Ausnahmen gem&#228;&#223; DataCore-Empfehlung setzen</td></tr>
+<tr class='Info'><td>Info</td><td>Verf&#252;gbarkeit</td><td>Witness (Split-Brain-Schutz)</td><td>DEMO-GROUP</td><td>Kein Witness konfiguriert</td><td>Bei zwei Servern einen Witness einrichten, damit bei Verbindungsverlust automatisch die richtige Seite aktiv bleibt</td></tr>
+<tr class='OK'><td>OK</td><td>Betrieb</td><td>Uhrzeit synchron</td><td>SDS-B</td><td>Abweichung zu diesem Server: 0.4 s</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Host-Pfade</td><td>Aktive Pfade je vDisk</td><td>esx01.demo.local / VD-SQL01</td><td>4 von 4 Pfaden aktiv</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Leistung</td><td>Pool-Backend-Latenz</td><td>SDS-A</td><td>1.1 ms</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Lizenz &amp; Software</td><td>Gleicher Versionsstand</td><td>DEMO-GROUP</td><td>Alle Server auf 10.0 PSP 22 (Build 15.0.2200.53414)</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Lizenz &amp; Software</td><td>Lizenz-Compliance</td><td>DEMO-GROUP</td><td>Lizenztyp: Standard</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Netzwerk</td><td>DataCore-Verwaltungsport 3793</td><td>SDS-B</td><td>sds-b.demo.local (10.10.0.12) erreichbar</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Pools &amp; Disks</td><td>Freie Kapazit&#228;t</td><td>Pool1 on SDS-B</td><td>41 % frei (6.2 TB von 15.0 TB)</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Replikation &amp; Schutz</td><td>Replikationsstatus</td><td>VD-SQL01</td><td>Status: Replicating; &#220;bertragung: Enabled; Fehler: keine</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Replikation &amp; Schutz</td><td>Snapshots/CDP/Rollbacks</td><td>DEMO-GROUP</td><td>6 Snapshot(s), 2 vDisk-Seite(n) mit CDP, 0 Rollback(s)</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Server &amp; Cache</td><td>Cache-Gr&#246;&#223;e</td><td>SDS-A</td><td>38.4 GB Cache (60 % des RAM)</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Server &amp; Cache</td><td>Schreib-Cache-Modus</td><td>SDS-A</td><td>WritebackGlobal</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Server &amp; Cache</td><td>Schreib-Cache-Modus</td><td>SDS-B</td><td>WritebackGlobal</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Spiegelstrecke</td><td>MTU Ende-zu-Ende</td><td>10.30.1.11 -&gt; 10.30.1.12</td><td>MTU 9000 durchg&#228;ngig</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Spiegelstrecke</td><td>Netzlaufzeit</td><td>10.30.1.11 -&gt; 10.30.1.12</td><td>&#216; 0 ms, max 1 ms, kein Verlust</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>vDisks &amp; Spiegel</td><td>vDisk-Status</td><td>VD-SQL01</td><td>Online, MultiPathMirrored, 2048.0 GB</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Verf&#252;gbarkeit</td><td>Serverstatus</td><td>SDS-A</td><td>Online</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Verf&#252;gbarkeit</td><td>Serverstatus</td><td>SDS-B</td><td>Online</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Windows</td><td>CPU-Auslastung</td><td>SDS-A</td><td>16 logische CPUs, Auslastung 38 %; 2 f&#252;r DataCore-Poller reserviert</td><td></td></tr>
+<tr class='OK'><td>OK</td><td>Windows</td><td>Energiesparplan</td><td>SDS-A</td><td>H&#246;chstleistung</td><td></td></tr>
+</table>
+<h2>Messwerte</h2><pre>=== Server (Fe = Host-Zugriffe, Mirror = eingehende Spiegel-Schreibvorg&#228;nge) - Intervall 60 s ===
+Name  FeIOPS FeLatMs MirrorIOPS MirrorLatMs PoolIOPS PoolLatMs MBps CacheWriteHitPct CacheReadHitPct
+----  ------ ------- ---------- ----------- -------- --------- ---- ---------------- ---------------
+SDS-A    412    14.8        3.1         1.2       96       1.1 51.5             99.2            71.4
+SDS-B      0                288         9.6       81       1.2   36               99
+
+=== Disk-Pools - Intervall 60 s ===
+Name           IOPS ReadIOPS WriteIOPS MBps LatMs ReadLatMs WriteLatMs
+----           ---- -------- --------- ---- ----- --------- ----------
+Pool1 on SDS-A   96       41        55 38.2   1.1       0.9        1.3
+
+=== Frontend- und Spiegel-Ports - Intervall 60 s ===
+Name               Role     IOPS MBps LatMs ErrorsDelta BusyDelta
+----               ----     ---- ---- ----- ----------- ---------
+SDS-A-FE1 on SDS-A Frontend  208   26  14.5           0         0
+SDS-B-MR1 on SDS-B Mirror    288   36   9.4           0         0
+
+=== Replikationen - Intervall 60 s ===
+Name                      MBps MBToSend TimeLagSec InitPct BufferFreePct
+----                      ---- -------- ---------- ------- -------------
+VD-FILE01 from DEMO-GROUP 18.2     9830       2550                    64
+
+Einheiten: IOPS = Operationen/s, MBps = MB/s, *LatMs = mittlere Antwortzeit in ms, *Pct = Prozent.
+</pre>
+<h2>Bestand</h2><pre>=== Servergruppe DEMO-GROUP - Server ===
+Server Status Version     Cache           RAM   Frei   CacheGr&#246;&#223;e CPU     
+------ ------ -------     -----           ---   ----   ---------- ---     
+SDS-A  Online 10.0 PSP 22 WritebackGlobal 64 GB 9.8 GB 38.4 GB    16 Kerne
+SDS-B  Online 10.0 PSP 22 WritebackGlobal 64 GB 1.4 GB 38.4 GB    16 Kerne
+
+=== Disk-Pools ===
+Pool           Status  Tiering Tiers Disks Frei Gesamt   
+----           ------  ------- ----- ----- ---- ------   
+Pool1 on SDS-A Running    True 1,2,3    12 14 % 15 360 GB
+Pool1 on SDS-B Running    True 1,2,3    12 41 % 15 360 GB
+
+=== Virtuelle Disks ===
+vDisk     Typ               Gr&#246;&#223;e   Status Ausgeliefert Seiten                          
+-----     ---               -----   ------ ------------ ------                          
+VD-SQL01  MultiPathMirrored 2048 GB Online         True SDS-A:UpToDate, SDS-B:UpToDate  
+VD-FILE01 MultiPathMirrored 4096 GB Online         True SDS-A:UpToDate, SDS-B:Recovering
+
+=== Host-Pfade: esx02.demo.local ===
+vDisk    Ziel               Aktiv Verbindung            
+-----    ----               ----- ----------            
+VD-SQL01 SDS-A-FE1 on SDS-A  True 10.20.1.12-&gt;10.20.1.11
+VD-SQL01 SDS-A-FE2 on SDS-A  True 10.20.2.12-&gt;10.20.2.11
+VD-SQL01 SDS-B-FE1 on SDS-B False                       
+VD-SQL01 SDS-B-FE2 on SDS-B False
+
+</pre>
+</body></html>

@@ -1,0 +1,78 @@
+﻿SANsymphony Diagnose 1.0.0
+==========================
+
+Prüft einen DataCore-SANsymphony-Server und seine Servergruppe umfassend (rund 100
+Prüfergebnisse in 13 Bereichen), bewertet alles mit Ampel, Punktzahl und Ursachenkette
+und nennt die wichtigsten Maßnahmen. Rein lesend - das Tool ändert nichts.
+
+Start
+-----
+1. ZIP auf einen SANsymphony-Server kopieren und entpacken.
+2. Start-SsyDiagnose.cmd doppelklicken (UAC-Abfrage bestätigen).
+3. Optionen wählen und "Diagnose starten":
+   - Messdauer (15 s bis 5 min) - für Leistungswerte während typischer Last messen
+   - "Leistung messen" abwählen für eine schnelle Konfigurationsprüfung
+   - "Tiefenanalyse": 20 s Paketmitschnitt (pktmon) der iSCSI-Anmeldungen; erkennt Hosts
+     oder Partner, die sich mit falscher Quell-IP anmelden. Läuft nur, wenn kein anderer
+     Mitschnitt und keine pktmon-Filter aktiv sind.
+4. "Abbrechen" stoppt eine laufende Diagnose.
+
+Oberfläche
+----------
+- Ampel + Punktzahl, Gesamteinschätzung (Verfügbarkeit / Leistung / Schutz / Betrieb),
+  wichtigste Maßnahmen
+- Kacheln je Bereich (Klick filtert die Befunde)
+- Befunde: Filter nach Bereich und Status, Volltextsuche, Detailansicht mit Empfehlung
+- Bestand: Server, Pools, Disks, vDisks, Hosts mit allen Pfaden, Replikationen,
+  iSCSI-Karten und -Sessions
+- Messwerte: IOPS, MB/s und Latenzen je Ebene (Host, Spiegel, Cache, Pool, Disk, Port,
+  Replikation)
+- Vergleich: früheren JSON-Bericht laden -> neu/schlechter, behoben/besser, Leistung alt/neu
+- Bericht speichern als HTML, JSON (für spätere Vergleiche) oder CSV
+
+Ohne Oberfläche
+---------------
+  powershell -ExecutionPolicy Bypass -File SsyDiagnose.ps1 -NoGui -Seconds 60 ^
+     -ReportPath C:\Temp\bericht.html -JsonPath C:\Temp\bericht.json
+  Weitere Schalter: -SkipPerformance  -DeepAnalysis  -CompareWith C:\Temp\alt.json
+
+Bereiche und Prüfungen
+----------------------
+Verfügbarkeit       Serverstatus, Wartungsmodus, Anzahl Server, Witness, nicht gespiegelte
+                    vDisks, Host erreicht beide Spiegelseiten
+Lizenz & Software   Compliance, Lizenztyp und -ablauf, Lizenz-Alarme, Kapazität, Versionsgleichheit
+Server & Cache      Cache-Modus (Write-Back), Stromversorgung, freier RAM, Cache-Größe, Protokollierung
+Pools & Disks       Pool-Status/-Modus, freie Kapazität, Überbuchung, Pool-Disk-Status, Tiers,
+                    Disk-Status, S.M.A.R.T., ungenutzte Disks
+vDisks & Spiegel    vDisk-Status, Write-Through, Zuordnung, Logical-Disk-Fehler, Datenstand je
+                    Seite, Resync, Spiegelbeziehungen
+Host-Pfade          Hosts (MPIO, ALUA, Pfadrichtlinie), aktive Pfade je vDisk, Initiator-IPs,
+                    Sessions über Kreuz
+Replikation/Schutz  Status, Fehler, Initialisierung, Rückstand, Puffer, Pufferordner, Testmodus,
+                    Snapshots (Alter), CDP, Rollbacks
+Monitore & Alarme   alle auffälligen DataCore-Monitore, Alarme der letzten 24 h (häufigste),
+                    unbestätigte Alarme
+Betrieb             Konfiguration synchron, Uhrzeit der Server, Konfigurationssicherung (Alter),
+                    E-Mail/Syslog-Alarmierung, Telemetrie
+Windows             DataCore-/iSCSI-/VMware-Dienste, Energiesparplan, CPU inkl. Poller,
+                    Laufzeit, Patchstand, Platz auf C:, Neustart ausstehend, Auslagerungsdatei,
+                    Systemprotokoll (Speicher/Netz), DataCore-Fehler, Virenschutz-Ausnahmen, Firewall
+Netzwerk            NIC-Typ (VMXNET3), Link, Bandbreite, getrennte Subnetze, MTU, Delayed ACK,
+                    Energiesparen der Karte, RSS, Gateway/DNS auf iSCSI-Karten, Fehlerzähler,
+                    Namensauflösung und Port 3793 zu Partnerservern
+Spiegelstrecke      Sessions im passenden Subnetz (ein-/ausgehend), Pfadtrennung, ungenutzte
+                    Spiegelkarte, Ping/Paketverlust, MTU Ende-zu-Ende, iSCSI-Digest,
+                    getrennte Sessions, Tiefenanalyse
+Leistung            Host-Antwortzeit mit Ursachenkette, Spiegel-Latenz, Pool-/Disk-Latenz,
+                    Warteschlangen, Cache-Treffer, Pool-Asymmetrie, Destage, Port-Fehler/Busy,
+                    Poller-Last, Replikationsdurchsatz
+
+Hinweis: Netzwerk-, Windows- und Sitzungsprüfungen gelten für den Server, auf dem das Tool
+läuft. Für ein vollständiges Bild auf jedem Server der Gruppe ausführen.
+Voraussetzungen: Windows PowerShell 5.1, Administratorrechte, DataCore-PowerShell-Cmdlets.
+
+Demo ohne SANsymphony (Beispieldaten, keine Adminrechte nötig):
+  powershell -ExecutionPolicy Bypass -File SsyDiagnose.ps1 -Demo
+
+Projektseite, Updates und Fehlerberichte: siehe README im GitHub-Repository.
+Community-Werkzeug, kein offizielles Produkt der DataCore Software Corporation.
